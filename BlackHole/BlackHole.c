@@ -2083,7 +2083,7 @@ static OSStatus	BlackHole_GetDevicePropertyData(AudioServerPlugInDriverRef inDri
 			//	This property returns the how close to now the HAL can read and write. For
 			//	this, device, the value is 0 due to the fact that it always vends silence.
 			FailWithAction(inDataSize < sizeof(UInt32), theAnswer = kAudioHardwareBadPropertySizeError, Done, "BlackHole_GetDevicePropertyData: not enough space for the return value of kAudioDevicePropertySafetyOffset for the device");
-			*((UInt32*)outData) = 0;
+			*((UInt32*)outData) = LATENCY_FRAME_SIZE;
 			*outDataSize = sizeof(UInt32);
 			break;
 
@@ -2525,7 +2525,7 @@ static OSStatus	BlackHole_GetStreamPropertyData(AudioServerPlugInDriverRef inDri
 		case kAudioStreamPropertyLatency:
 			//	This property returns any additonal presentation latency the stream has.
 			FailWithAction(inDataSize < sizeof(UInt32), theAnswer = kAudioHardwareBadPropertySizeError, Done, "BlackHole_GetStreamPropertyData: not enough space for the return value of kAudioStreamPropertyStartingChannel for the stream");
-			*((UInt32*)outData) = 0;
+			*((UInt32*)outData) = LATENCY_FRAME_SIZE;
 			*outDataSize = sizeof(UInt32);
 			break;
 
@@ -3514,7 +3514,7 @@ static OSStatus	BlackHole_SetControlPropertyData(AudioServerPlugInDriverRef inDr
 						{
 							gVolume_Input_Master_Value = theNewVolume;
 							*outNumberPropertiesChanged = 2;
-							outChangedAddresses[0].mSelector = kAudioLevelControlPropertyScalarValue;
+							outChangedAddresses[0].mSelector = gVolume_Output_Master_Value;
 							outChangedAddresses[0].mScope = kAudioObjectPropertyScopeGlobal;
 							outChangedAddresses[0].mElement = kAudioObjectPropertyElementMaster;
 							outChangedAddresses[1].mSelector = kAudioLevelControlPropertyDecibelValue;
@@ -3855,9 +3855,10 @@ static OSStatus	BlackHole_DoIOOperation(AudioServerPlugInDriverRef inDriver, Aud
 	FailWithAction((inStreamObjectID != kObjectID_Stream_Input) && (inStreamObjectID != kObjectID_Stream_Output), theAnswer = kAudioHardwareBadObjectError, Done, "BlackHole_DoIOOperation: bad stream ID");
     
     
-    // copy internal ring buffer to io buffer
+    /*     READ INPUT         */
 	if(inOperationID == kAudioServerPlugInIOOperationReadInput)
 	{
+        /*     WRITE TO IOBUFFER         */
         // calculate the ring buffer offset for the first sample INPUT
         ringBufferOffset = ((UInt64)(inIOCycleInfo->mInputTime.mSampleTime * BYTES_PER_FRAME) % RING_BUFFER_SIZE);
         
@@ -3867,22 +3868,31 @@ static OSStatus	BlackHole_DoIOOperation(AudioServerPlugInDriverRef inDriver, Aud
         
         if (remainingRingBufferByteSize > inIOBufferByteSize)
         {
-
             // copy whole buffer if we have space
             memcpy(ioMainBuffer, ringBuffer + ringBufferOffset, inIOBufferByteSize);
-
-            // clear the internal ring buffer
-            memset(ringBuffer + ringBufferOffset, 0, inIOBufferByteSize);
 
         }
         else
         {
-
             // copy 1st half
             memcpy(ioMainBuffer, ringBuffer + ringBufferOffset, remainingRingBufferByteSize);
             // copy 2nd half
             memcpy(ioMainBuffer + remainingRingBufferByteSize, ringBuffer, inIOBufferByteSize - remainingRingBufferByteSize);
-
+        }
+        
+        
+        /*     CLEAR TO RINGBUFFER TRAILING BY 3072 SAMPLES         */
+        // calculate the ring buffer offset for the first sample INPUT
+        ringBufferOffset = ((UInt64)(inIOCycleInfo->mInputTime.mSampleTime * BYTES_PER_FRAME - 3072) % RING_BUFFER_SIZE);
+        remainingRingBufferByteSize = RING_BUFFER_SIZE - ringBufferOffset;
+        
+        if (remainingRingBufferByteSize > inIOBufferByteSize)
+        {
+            // clear the internal ring buffer
+            memset(ringBuffer + ringBufferOffset, 0, inIOBufferByteSize);
+        }
+        else
+        {
             // clear the 1st half
             memset(ringBuffer + ringBufferOffset, 0, remainingRingBufferByteSize);
             // clear the 2nd half
@@ -3890,32 +3900,27 @@ static OSStatus	BlackHole_DoIOOperation(AudioServerPlugInDriverRef inDriver, Aud
         }
     }
     
-    // copy io buffer to internal ring buffer
+    /*     WRITE MIX         */
     if(inOperationID == kAudioServerPlugInIOOperationWriteMix)
     {
-        // TODO Mix inputs instead of over writing. 
-        
+        /*     WRITE MIX TO RINGBUFFER         */
         // calculate the ring buffer offset for the first sample OUTPUT
         ringBufferOffset = ((UInt64)(inIOCycleInfo->mOutputTime.mSampleTime * BYTES_PER_FRAME) % RING_BUFFER_SIZE);
         
         // calculate the size of the buffer
         inIOBufferByteSize = inIOBufferFrameSize * BYTES_PER_FRAME;
-
+        
         // mix the audio
         for(UInt64 sample = 0; sample < inIOBufferByteSize; sample += sizeof(Float32))
         {
             // sample from ioMainBuffer
             Float32* ioSample = ioMainBuffer + sample;
             
-            // check if there is anything there before mixing
-            if (*ioSample != 0){
-                
-                // sample from ring buffer
-                Float32* ringSample = (Float32*)(ringBuffer + (ringBufferOffset + sample) % RING_BUFFER_SIZE);
-                
-                // mix the two together
-                *ringSample += *ioSample;
-            }
+            // sample from ring buffer
+            Float32* ringSample = (Float32*)(ringBuffer + (ringBufferOffset + sample) % RING_BUFFER_SIZE);
+            
+            // mix the two together
+            *ringSample += *ioSample;
         }
         
         // clear the io buffer
