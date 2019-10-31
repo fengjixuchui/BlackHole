@@ -3,6 +3,14 @@
 ## Description
 BlackHole is a modern MacOS virtual audio driver that allows applications to pass audio to other applications with zero additional latency.
 
+- [Features](#features)
+- [Easy Installation Instructions](#easy-installation-instructions)
+- [Usage Examples]()
+- [Advanced Installation Instructions](#advanced-installation-instructions)
+- [Advanced Customization](#advanced-customization)
+- [FAQ](#faq)
+- [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki)
+
 ## Features
 - Supports 16 audio channels.
 - Customizable to 256+ channels if you think your computer can handle it.
@@ -10,7 +18,7 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 - No additional driver latency. 
 - Works on macOS 10.10+ including macOS 10.15 Catalina
 
-![Image of BlackHole Audio Driver](https://github.com/ExistentialAudio/BlackHole/blob/master/BlackHole.png)
+![Image of BlackHole Audio Driver](Images/BlackHole.png)
 
 ## Easy Installation Instructions
 1. Download [BlackHole.vx.x.x.pkg](https://github.com/ExistentialAudio/BlackHole/releases/)
@@ -19,7 +27,9 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 4. Open and install package
 5. Restart Computer (Catalina Only)
 
-## Usage
+Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for application specific setup.
+
+## Usage Examples
 ### Record System Audio
 1. Open Audio MIDI Setup
 2. Right-click on "BlackHole" and select "Use This Device For Sound Output"
@@ -46,4 +56,23 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 1. Delete BlackHole.driver from `/Library⁩/Audio⁩/Plug-Ins⁩/HAL`
 2. Restart computer or restart CoreAudio with terminal command `sudo killall coreaudiod`
 
+## FAQ
+
+### How can I listen to the audio and use BlackHole at the same time?
+[Setup a Multi-Output Device](https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device)
+
+### How can I change the volume of a Multi-Output device?
+Unfortunately macOS does not support changing the volume of a Multi-Output device but you can set the volume of individual devices in Audio MIDI Setup. 
+
+### How can I use BlackHole with Audacity in Catalina?
+Audacity is not compatible with Catalina. But there might be a [work around](https://www.audacityteam.org/macos-10-15-catalina-is-not-yet-supported-by-audacity/).
+
+### Why is nothing is playing through BlackHole? 
+Check System `Preferences` -> `Security & Privacy` -> `Privacy` -> `Microphone` to make sure your DAW has microphone access. 
+
+### You are awesome. Where can I donate?
 [Support us on Patreon](https://www.patreon.com/existentialaudio)
+
+Bitcoin:  1DxkhWHfRUBezMNbRM3rDKLbxEi1GVZRXz
+
+Litecoin: LchR249L8aXnDEDToLpPVSJotuvV381Yka
