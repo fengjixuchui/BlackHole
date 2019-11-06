@@ -149,10 +149,12 @@ static Float32                      gVolume_Output_Master_Value         = 0.0;
 static bool                         gMute_Input_Master_Value            = false;
 static bool                         gMute_Output_Master_Value           = false;
 
-//static const UInt32                 kDataSource_NumberItems             = 4;
-//#define                             kDataSource_ItemNamePattern         "BlackHole %d"
 static const UInt32                 kDataSource_NumberItems             = 1;
-#define                             kDataSource_ItemNamePattern         "BlackHole"
+#define                             kDataSource_ItemNamePattern         "BlackHole %ich"
+
+#define                             DEVICE_NAME                         "BlackHole %ich"
+#define                             MANUFACTURER_NAME                   "Existential Audio Inc."
+
 static UInt32                       gDataSource_Input_Master_Value      = 0;
 static UInt32                       gDataSource_Output_Master_Value     = 0;
 
@@ -161,7 +163,7 @@ static UInt32                       gDataSource_Output_Master_Value     = 0;
 #define                             BITS_PER_CHANNEL                    32
 #define                             BYTES_PER_CHANNEL                   (BITS_PER_CHANNEL / 8)
 #define                             BYTES_PER_FRAME                     (NUMBER_OF_CHANNELS * BYTES_PER_CHANNEL)
-#define                             RING_BUFFER_SIZE                    (8192 * NUMBER_OF_CHANNELS * BYTES_PER_CHANNEL)
+#define                             RING_BUFFER_SIZE                    ((8192 + LATENCY_FRAME_SIZE) * NUMBER_OF_CHANNELS * BYTES_PER_CHANNEL)
 static char                         ringBuffer[RING_BUFFER_SIZE];
 static UInt64                       ringBufferOffset                    = 0;
 static UInt64                       inIOBufferByteSize                  = 0;

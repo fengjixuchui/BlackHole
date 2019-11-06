@@ -1,5 +1,13 @@
 # BlackHole Virtual Audio Driver v0.2
 
+[![Platform:macOS](https://img.shields.io/badge/platform-macOS-lightgrey)
+![GitHub](https://img.shields.io/github/v/release/ExistentialAudio/BlackHole)
+![GitHub All Releases](https://img.shields.io/github/downloads/existentialaudio/blackhole/total)](https://github.com/ExistentialAudio/BlackHole/releases)
+[![GitHub](https://img.shields.io/github/license/ExistentialAudio/BlackHole)](LICENSE)
+[![Build Status](https://travis-ci.com/ExistentialAudio/BlackHole.svg?branch=master)](https://travis-ci.com/ExistentialAudio/BlackHole)
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/ExistentialAI?style=social)](https://twitter.com/ExistentialAI)
+
 ## Description
 BlackHole is a modern MacOS virtual audio driver that allows applications to pass audio to other applications with zero additional latency.
 
@@ -60,6 +68,9 @@ Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for applica
 
 ## FAQ
 
+### Why isn't BlackHole showing up in the Applications folder?
+BlackHole is an audio interface driver. It only shows up in `Audio MIDI Setup`, `Sound Preferences`, or other audio applications.
+
 ### How can I listen to the audio and use BlackHole at the same time?
 [Setup a Multi-Output Device](https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device)
 
@@ -70,7 +81,7 @@ Unfortunately macOS does not support changing the volume of a Multi-Output devic
 Audacity is not compatible with Catalina. But there might be a [work around](https://www.audacityteam.org/macos-10-15-catalina-is-not-yet-supported-by-audacity/).
 
 ### Why is nothing is playing through BlackHole? 
-Check System `Preferences` -> `Security & Privacy` -> `Privacy` -> `Microphone` to make sure your DAW has microphone access. 
+Check `System Preferences` -> `Security & Privacy` -> `Privacy` -> `Microphone` to make sure your DAW has microphone access. 
 
 ### You are awesome. Where can I donate?
 [Support us on Patreon](https://www.patreon.com/existentialaudio)
