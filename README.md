@@ -1,15 +1,22 @@
-# BlackHole Virtual Audio Driver v0.2
-
+# BlackHole: Virtual Audio Driver
 [![Platform:macOS](https://img.shields.io/badge/platform-macOS-lightgrey)
 ![GitHub](https://img.shields.io/github/v/release/ExistentialAudio/BlackHole)
 ![GitHub All Releases](https://img.shields.io/github/downloads/existentialaudio/blackhole/total)](https://github.com/ExistentialAudio/BlackHole/releases)
 [![GitHub](https://img.shields.io/github/license/ExistentialAudio/BlackHole)](LICENSE)
 [![Build Status](https://travis-ci.com/ExistentialAudio/BlackHole.svg?branch=master)](https://travis-ci.com/ExistentialAudio/BlackHole)
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/ExistentialAI?style=social)](https://twitter.com/ExistentialAI)
-
-## Description
 BlackHole is a modern MacOS virtual audio driver that allows applications to pass audio to other applications with zero additional latency.
+
+## Support Development
+[![Patreon](https://img.shields.io/badge/Patreon-Become%20A%20Patron-ff69b4)](https://www.patreon.com/existentialaudio) 
+[![Bitcoin](https://img.shields.io/badge/Bitcoin-1DxkhWHfRUBezMNbRM3rDKLbxEi1GVZRXz-orange)](https://www.blockchain.com/btc/address/1DxkhWHfRUBezMNbRM3rDKLbxEi1GVZRXz) 
+[![Litecoin](https://img.shields.io/badge/Litecoin-LchR249L8aXnDEDToLpPVSJotuvV381Yka-blue)](https://live.blockcypher.com/ltc/address/LchR249L8aXnDEDToLpPVSJotuvV381Yka/)
+
+## Stay Up To Date 
+[![Twitter](https://img.shields.io/badge/Twitter-1da1f2)](https://twitter.com/ExistentialAI)
+[![Facebook](https://img.shields.io/badge/Facebook-4267B2)](https://www.facebook.com/Existential-Audio-103423234434751)
+
+## Table of Contents
 
 - [Features](#features)
 - [Easy Installation Instructions](#easy-installation-instructions)
@@ -38,7 +45,7 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 
 BlackHole is also available using `brew cask install blackhole`
 
-Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for application specific setup.
+Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for application specific setup.        
 
 ## Usage Examples
 ### Record System Audio
@@ -47,6 +54,7 @@ Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for applica
 3. Open DAW and set input device to "BlackHole" 
 4. Set track to input from channel 1-2
 5. Play audio from another application and monitor or record in your DAW.
+NOTE: You will not be able to hear the audio with this method. 
 
 ### Route Audio Between Applications
 1. Set output driver to "BlackHole" in sending application
@@ -99,10 +107,3 @@ Check that the volume is all the way up on BlackHole input and output in ``Audio
 
 ### Can I integrate BlackHole into my app?
 BlackHole is licensed under GPL-3.0. You can use BlackHole as long as your app is also licensed as GPL-3.0. For all other applications contact me directly at devinroth@existential.audio.
-
-### You are awesome. Where can I donate?
-[Support us on Patreon](https://www.patreon.com/existentialaudio)
-
-Bitcoin:  1DxkhWHfRUBezMNbRM3rDKLbxEi1GVZRXz
-
-Litecoin: LchR249L8aXnDEDToLpPVSJotuvV381Yka
