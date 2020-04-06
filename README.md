@@ -7,6 +7,8 @@
 
 BlackHole is a modern MacOS virtual audio driver that allows applications to pass audio to other applications with zero additional latency.
 
+### [Download Installer](https://existential.audio/blackhole/?pk_campaign=github&pk_kwd=readme)
+
 ## Support Development
 [![Patreon](https://img.shields.io/badge/Patreon-Become%20A%20Patron-ff69b4)](https://www.patreon.com/existentialaudio) 
 [![Bitcoin](https://img.shields.io/badge/Bitcoin-1DxkhWHfRUBezMNbRM3rDKLbxEi1GVZRXz-orange)](https://www.blockchain.com/btc/address/1DxkhWHfRUBezMNbRM3rDKLbxEi1GVZRXz) 
@@ -23,6 +25,7 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 - [Easy Installation Instructions](#easy-installation-instructions)
 - [Usage Examples]()
 - [Advanced Installation Instructions](#advanced-installation-instructions)
+- [Uninstallation Instructions](#uninstallation-instructions)
 - [Feature Requests](#feature-requests)
 - [FAQ](#faq)
 - [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki)
@@ -37,11 +40,13 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 ![Image of BlackHole Audio Driver](Images/BlackHole.png)
 
 ## Easy Installation Instructions
-1. Download [BlackHole.vx.x.x.pkg](https://github.com/ExistentialAudio/BlackHole/releases/)
+1. [Download Installer](http://existential.audio/blackhole/)
 2. Close all running audio applications
 3. Open and install package
 
 BlackHole is also available using `brew cask install blackhole`
+
+For more details visit https://github.com/ExistentialAudio/BlackHole/wiki/Installation
 
 Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for application specific setup.        
 
@@ -49,7 +54,7 @@ Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for applica
 ### Record System Audio
 1. [Setup Multi-output Device](https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device)
 2. In `Audio Midi Setup`->`Audio Devices` Right-click on the newly created Multi-output and select "Use This Device For Sound Output"
-3. Open DAW and set input device to "BlackHole" 
+3. Open digital audio workstation (DAW) such as GarageBand and set input device to "BlackHole" 
 4. Set track to input from channel 1-2
 5. Play audio from another application and monitor or record in your DAW.
 
@@ -65,8 +70,10 @@ Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for applica
 3. Restart CoreAudio with terminal command `sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod`
 
 ## Uninstallation Instructions
-1. Delete BlackHole.driver from `/Library⁩/Audio⁩/Plug-Ins⁩/HAL`
+1. Delete BlackHole.driver from `/Library⁩/Audio⁩/Plug-Ins⁩/HAL` NOTE: The directory is system/Library not user/Library
 2. Restart CoreAudio with terminal command `sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod`
+
+Need more help? [Visit the wiki.](https://github.com/ExistentialAudio/BlackHole/wiki/Uninstallation)
 
 ## Feature Requests
 
@@ -95,11 +102,15 @@ Unfortunately macOS does not support changing the volume of a Multi-Output devic
 Audacity is not compatible with Catalina. But there might be a [work around](https://www.audacityteam.org/macos-10-15-catalina-is-not-yet-supported-by-audacity/).
 
 ### Why is nothing is playing through BlackHole? 
-- Check `System Preferences` -> `Security & Privacy` -> `Privacy` -> `Microphone` to make sure your DAW has microphone access. 
+- Check `System Preferences` -> `Security & Privacy` -> `Privacy` -> `Microphone` to make sure your digital audio workstation (DAW) has microphone access. 
 
 - Check that the volume is all the way up on BlackHole input and output in ``Audio Midi Setup``.
 
 - If you are using a multi-output device, due to issues with macOS the Build-in Output must be enabled and listed as the top device in the Multi-Output. https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device#4-select-output-devices
+
+### Where is `/Library/Audio/Plug-Ins/HAL/`?
+
+Chances are you are looking in `~/Library/` or `user/Library/` instead of `/Library`.  
 
 ### Can I integrate BlackHole into my app?
 BlackHole is licensed under GPL-3.0. You can use BlackHole as long as your app is also licensed as GPL-3.0. For all other applications contact me directly at devinroth@existential.audio.
