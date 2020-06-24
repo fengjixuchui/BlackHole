@@ -12,19 +12,21 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 ## Funding
 Sponsor: https://github.com/sponsors/ExistentialAudio
 
-Current Funding: $54 per month.
+Current Funding: $126 per month.
 
 ### Goals
 
 - [x] $50 per month. Create installer for BlackHole 2ch that will work along side BlackHole 16ch. (in progress)
-- [ ] $150 per month. Any ideas?
-
+- [x] $100 per month. One new detailed setup guide for each DAW. 
+      May: Logic Pro X
+      June: GarageBand
+- [ ] $200 per month. One video tutorial per month.
 
 ## Table of Contents
 
 - [Features](#features)
 - [Easy Installation Instructions](#easy-installation-instructions)
-- [Usage Examples]()
+- [Usage Examples](#usage-examples)
 - [Advanced Installation Instructions](#advanced-installation-instructions)
 - [Uninstallation Instructions](#uninstallation-instructions)
 - [Feature Requests](#feature-requests)
@@ -45,7 +47,7 @@ Current Funding: $54 per month.
 2. Close all running audio applications
 3. Open and install package
 
-BlackHole is also available using `brew cask install blackhole`
+Install via Homebrew `brew cask install blackhole`
 
 For more details visit https://github.com/ExistentialAudio/BlackHole/wiki/Installation
 
@@ -71,7 +73,7 @@ Visit the [Wiki](https://github.com/ExistentialAudio/BlackHole/wiki) for applica
 3. Restart CoreAudio with terminal command `sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod`
 
 ## Uninstallation Instructions
-1. Delete BlackHole.driver by running `rm -fr /Library/Audio/Plug-Ins/HAL/BlackHole.driver` NOTE: The directory is `system/Library` not `user/Library`
+1. Delete BlackHole.driver by running `rm -fr /Library/Audio/Plug-Ins/HAL/BlackHole.driver` NOTE: The directory is in `/Library` not `user/Library`
 2. Restart CoreAudio with terminal command `sudo launchctl kickstart -kp system/com.apple.audio.coreaudiod`
 
 Need more help? [Visit the wiki.](https://github.com/ExistentialAudio/BlackHole/wiki/Uninstallation)
