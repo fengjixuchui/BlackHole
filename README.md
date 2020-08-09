@@ -12,14 +12,15 @@ BlackHole is a modern MacOS virtual audio driver that allows applications to pas
 ## Funding
 Sponsor: https://github.com/sponsors/ExistentialAudio
 
-Current Funding: $126 per month.
+Current Funding: $137 per month.
 
 ### Goals
 
 - [x] $50 per month. Create installer for BlackHole 2ch that will work along side BlackHole 16ch. (in progress)
 - [x] $100 per month. One new detailed setup guide for each DAW. 
-      May: Logic Pro X
-      June: GarageBand
+- May: [Logic Pro X](https://existential.audio/blackhole/support/)
+- June: [GarageBand](https://existential.audio/blackhole/support/)
+- July: Audacity (in progress)
 - [ ] $200 per month. One video tutorial per month.
 
 ## Table of Contents
@@ -102,7 +103,7 @@ BlackHole is an audio interface driver. It only shows up in `Audio MIDI Setup`, 
 Unfortunately macOS does not support changing the volume of a Multi-Output device but you can set the volume of individual devices in Audio MIDI Setup. 
 
 ### How can I use BlackHole with Audacity in Catalina?
-Audacity is not compatible with Catalina. But there might be a [work around](https://www.audacityteam.org/macos-10-15-catalina-is-not-yet-supported-by-audacity/).
+Audacity only works with macOS Catalina as of Audacity version 2.4.1 in May 2020. If you have an older version, you will need to upgrade to the latest release.
 
 ### Why is nothing is playing through BlackHole? 
 - Check `System Preferences` -> `Security & Privacy` -> `Privacy` -> `Microphone` to make sure your digital audio workstation (DAW) has microphone access. 
