@@ -120,9 +120,14 @@ Unfortunately macOS does not support changing the volume of a Multi-Output devic
 
 - If you are using a multi-output device, due to issues with macOS the Built-in Output must be enabled and listed as the top device in the Multi-Output. https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device#4-select-output-devices
 
-### Where is `/Library/Audio/Plug-Ins/HAL/`?
+### What Apps Don't Work with Multi-Outputs?
+Unfortunatley multi-outputs are pretty buggy and some apps just won't work with them at all. Here is a list of known ones. If you have more to add please let me know.
+- Apple Podcasts
+- Apple Messages
+- HDHomeRun
 
-Chances are you are looking in `~/Library/` or `user/Library/` instead of `/Library`.  
+### Multi-Outputs crash every 20 minutes on Apple Silicon.
+Not a question but Multi-Outputs have always been buggy. Looks like Apple has abandoned them officially. Instead use BlackHole as system output and Audacity with BlackHole input, speaker output and enable monitoring. https://forum.audacityteam.org/viewtopic.php?t=83137
 
 ### Can I integrate BlackHole into my app?
 BlackHole is licensed under GPL-3.0. You can use BlackHole as long as your app is also licensed as GPL-3.0. For all other applications contact me directly at devinroth@existential.audio.
