@@ -348,7 +348,7 @@ static OSStatus	BlackHole_PerformDeviceConfigurationChange(AudioServerPlugInDriv
 	//	recalculate the state that depends on the sample rate
 	struct mach_timebase_info theTimeBaseInfo;
 	mach_timebase_info(&theTimeBaseInfo);
-    Float64 theHostClockFrequency = (Float64)theTimeBaseInfo.numer / (Float64)theTimeBaseInfo.denom;
+    Float64 theHostClockFrequency = (Float64)theTimeBaseInfo.denom / (Float64)theTimeBaseInfo.numer;
 	theHostClockFrequency *= 1000000000.0;
 	gDevice_HostTicksPerFrame = theHostClockFrequency / gDevice_SampleRate;
 
@@ -3905,8 +3905,8 @@ static OSStatus	BlackHole_DoIOOperation(AudioServerPlugInDriverRef inDriver, Aud
                     buffer[frame*NUMBER_OF_CHANNELS+channel] = 0;
                 }
                 
-                // clear ring buffer after 8192 samples.
-                ringBuffer[((mSampleTime+frame-8192)%kDevice_RingBufferSize)*NUMBER_OF_CHANNELS+channel] = 0;
+                // clear ring buffer leading by 16384 samples.
+                ringBuffer[((mSampleTime+frame-16384)%kDevice_RingBufferSize)*NUMBER_OF_CHANNELS+channel] = 0;
 
             }
         }
@@ -3934,8 +3934,8 @@ static OSStatus	BlackHole_DoIOOperation(AudioServerPlugInDriverRef inDriver, Aud
                     buffer[frame*NUMBER_OF_CHANNELS+channel] = 0;
                 }
                 
-                // clear ring buffer after 8192 samples.
-                ringBuffer[((mSampleTime+frame-8192)%kDevice_RingBufferSize)*NUMBER_OF_CHANNELS+channel] = 0;
+                // clear ring buffer trailing by 16384 samples.
+                ringBuffer[((mSampleTime+frame+8192)%kDevice_RingBufferSize)*NUMBER_OF_CHANNELS+channel] = 0;
             }
 
         }
